@@ -26,7 +26,8 @@ export function StageStrategy({
   outreachTemplate, 
   costWatchlist, 
   moatMap, 
-  setMoatMap 
+  setMoatMap,
+  onNavigateStage 
 }) {
   const [copiedManifesto, setCopiedManifesto] = useState(false);
   const [copiedJson, setCopiedJson] = useState(false);
@@ -261,6 +262,26 @@ ${costWatchlist.map(c => `- **${c.service}:** ${c.costDriver} (Budget: $${c.mont
       {/* Tab 1: Moat Scorecard */}
       {activeTab === 'moat' && (
         <div className="space-y-6">
+          {onNavigateStage && (
+            <div className="p-4 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+              <div className="flex items-start gap-2.5">
+                <Shield className="w-4 h-4 text-purple-400 mt-0.5 shrink-0" />
+                <div>
+                  <span className="font-bold text-white">Coding Agent Architecture (TypeSafe Blueprint): </span>
+                  <span className="text-purple-200">
+                    Avoid the KV cache routing trap with query-aware visibility ladders, tiered tool disclosure, and sensitivity-aware routing.
+                  </span>
+                </div>
+              </div>
+              <button
+                onClick={() => onNavigateStage('jev')}
+                className="px-3.5 py-1.5 bg-purple-600 hover:bg-purple-500 text-white rounded-xl font-bold text-xs whitespace-nowrap self-start sm:self-auto shadow-md transition-all"
+              >
+                Inspect Jev Harness
+              </button>
+            </div>
+          )}
+
           <div className="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
               <div>

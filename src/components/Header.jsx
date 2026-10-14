@@ -14,10 +14,13 @@ import {
   DollarSign, 
   Sparkles,
   Layers,
-  ArrowRight
+  ArrowRight,
+  Database,
+  Network,
+  Cpu
 } from 'lucide-react';
 
-export const STAGES = [
+export const OPERATING_STAGES = [
   { id: 'dashboard', label: 'Dashboard', desc: 'Operating Overview', icon: Compass },
   { id: 'discovery', label: 'Market & Discovery', desc: 'Interviews & Sizing', icon: Search },
   { id: 'wedge', label: 'Product Wedge', desc: 'One-Job & Pilots', icon: Target },
@@ -25,6 +28,12 @@ export const STAGES = [
   { id: 'operations', label: 'Execution & Rhythm', desc: 'Weekly Plan & SOPs', icon: CheckCircle2 },
   { id: 'economics', label: 'Unit Economics', desc: 'Runway & Cost Watch', icon: DollarSign },
   { id: 'strategy', label: 'Moat & Strategy', desc: 'Defensibility & GTM', icon: ShieldAlert }
+];
+
+export const AGENT_ENGINES = [
+  { id: 'bigset', label: 'Bigset Swarm', desc: 'Live Lead & Dataset Builder', icon: Database, badge: 'TinyFish' },
+  { id: 'gateway', label: 'FreeLLMAPI Gateway', desc: 'Multi-Provider Quota Pool', icon: Network, badge: '5 Providers' },
+  { id: 'jev', label: 'Jev Harness', desc: 'Meta-Attention & Visibility', icon: Cpu, badge: 'TypeSafe' }
 ];
 
 export default function Header({
@@ -42,7 +51,10 @@ export default function Header({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         {/* Brand & Venture Identifier */}
         <div className="flex items-center space-x-3 sm:space-x-4 min-w-0">
-          <div className="flex items-center space-x-2.5">
+          <button 
+            onClick={() => onSelectStage('dashboard')}
+            className="flex items-center space-x-2.5 text-left focus:outline-none"
+          >
             <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-violet-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/25">
               <Layers className="w-4 h-4" />
             </div>
@@ -50,14 +62,14 @@ export default function Header({
               <div className="flex items-center space-x-1.5">
                 <span className="font-bold tracking-tight text-white text-sm sm:text-base">Founder OS</span>
                 <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
-                  v2.0
+                  v2.2
                 </span>
               </div>
               <p className="text-[11px] text-slate-400 truncate hidden sm:block">
                 {venture.name} • {venture.category}
               </p>
             </div>
-          </div>
+          </button>
 
           <div className="h-5 w-px bg-slate-800 hidden md:block" />
 
@@ -113,27 +125,66 @@ export default function Header({
         </div>
       </div>
 
-      {/* Stage Stepper: Dashboard -> Discovery -> Wedge -> Distribution -> Operations -> Economics -> Strategy */}
+      {/* Stepper Navigation: Founder Stages + Agent Engines */}
       <div className="border-t border-slate-800/80 bg-[#090e1a]/80 overflow-x-auto no-scrollbar">
-        <div className="max-w-7xl mx-auto px-4 flex items-center space-x-1 py-1.5 min-w-max">
-          {STAGES.map((s, idx) => {
-            const Icon = s.icon;
-            const isActive = activeStage === s.id;
-            return (
-              <button
-                key={s.id}
-                onClick={() => onSelectStage(s.id)}
-                className={`flex items-center space-x-2 px-3 py-1.5 rounded-xl text-xs font-medium transition-all ${
-                  isActive
-                    ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-500/25 font-semibold'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/60'
-                }`}
-              >
-                <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-white' : 'text-slate-400'}`} />
-                <span>{idx + 1}. {s.label}</span>
-              </button>
-            );
-          })}
+        <div className="max-w-7xl mx-auto px-4 flex items-center justify-between py-1.5 min-w-max gap-4">
+          {/* Operating Stages 1-7 */}
+          <div className="flex items-center space-x-1">
+            {OPERATING_STAGES.map((s, idx) => {
+              const Icon = s.icon;
+              const isActive = activeStage === s.id;
+              return (
+                <button
+                  key={s.id}
+                  onClick={() => onSelectStage(s.id)}
+                  className={`flex items-center space-x-1.5 px-2.5 py-1.5 rounded-xl text-xs font-medium transition-all ${
+                    isActive
+                      ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-500/25 font-semibold'
+                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-900/60'
+                  }`}
+                >
+                  <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-white' : 'text-slate-400'}`} />
+                  <span>{idx + 1}. {s.label}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="h-4 w-px bg-slate-800 hidden md:block" />
+
+          {/* Agent Engines: Bigset, Gateway, Jev */}
+          <div className="flex items-center space-x-1.5">
+            <span className="text-[10px] font-mono uppercase text-slate-500 font-bold px-1 hidden lg:inline">
+              AI Engines:
+            </span>
+            {AGENT_ENGINES.map((eng) => {
+              const Icon = eng.icon;
+              const isActive = activeStage === eng.id;
+              return (
+                <button
+                  key={eng.id}
+                  onClick={() => onSelectStage(eng.id)}
+                  className={`flex items-center space-x-1.5 px-2.5 py-1 rounded-xl text-xs font-semibold border transition-all ${
+                    isActive
+                      ? eng.id === 'bigset'
+                        ? 'bg-emerald-600 text-white border-emerald-500 shadow-sm'
+                        : eng.id === 'gateway'
+                        ? 'bg-blue-600 text-white border-blue-500 shadow-sm'
+                        : 'bg-purple-600 text-white border-purple-500 shadow-sm'
+                      : 'bg-slate-950/60 text-slate-300 border-slate-800 hover:border-slate-700 hover:text-white'
+                  }`}
+                >
+                  <Icon className="w-3.5 h-3.5" />
+                  <span>{eng.label}</span>
+                  <span className={`text-[9px] px-1 py-0.2 rounded font-mono font-bold ${
+                    isActive ? 'bg-black/30 text-white' : 'bg-slate-900 text-slate-400'
+                  }`}>
+                    {eng.badge}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </header>

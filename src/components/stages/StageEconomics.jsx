@@ -15,7 +15,7 @@ import {
 } from 'lucide-react';
 import { calculateRunwayAndEconomics } from '../../utils/calculations';
 
-export function StageEconomics({ venture, setVenture, costWatchlist, setCostWatchlist }) {
+export function StageEconomics({ venture, setVenture, costWatchlist, setCostWatchlist, onNavigateStage }) {
   // Scenario planner local state
   const [scenarioClinics, setScenarioClinics] = useState(25);
   const [scenarioPrice, setScenarioPrice] = useState(199);
@@ -196,6 +196,27 @@ export function StageEconomics({ venture, setVenture, costWatchlist, setCostWatc
           </div>
         </div>
       </div>
+
+      {/* Multi-Provider Gateway Quota Pool Banner */}
+      {onNavigateStage && (
+        <div className="p-4 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+          <div className="flex items-start gap-2.5">
+            <Zap className="w-4 h-4 text-blue-400 mt-0.5 shrink-0" />
+            <div>
+              <span className="font-bold text-white">Zero-Cost AI Prototyping: </span>
+              <span className="text-blue-200">
+                Stack Google AI Studio, Groq, Cerebras, and Mistral behind one unified endpoint to pool 30,000+ free requests/day with auto-failover.
+              </span>
+            </div>
+          </div>
+          <button
+            onClick={() => onNavigateStage('gateway')}
+            className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-xs whitespace-nowrap self-start sm:self-auto shadow-md transition-all"
+          >
+            Open Multi-Provider Gateway
+          </button>
+        </div>
+      )}
 
       {/* Variable Delivery Cost Watchlist (Deepgram, Claude/GPT, Cloud) */}
       <div className="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6">

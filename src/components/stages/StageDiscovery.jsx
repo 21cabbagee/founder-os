@@ -25,7 +25,8 @@ export default function StageDiscovery({
   onAddInterview,
   marketSizing,
   onUpdateMarketSizing,
-  onOpenAgentReach
+  onOpenAgentReach,
+  onNavigateStage
 }) {
   const [activeTab, setActiveTab] = useState('interviews'); // 'interviews' | 'scorecard' | 'sizing'
   const [showAddInterviewModal, setShowAddInterviewModal] = useState(false);
@@ -164,12 +165,23 @@ export default function StageDiscovery({
                 </span>
               </div>
             </div>
-            <button
-              onClick={onOpenAgentReach}
-              className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg font-semibold text-xs whitespace-nowrap self-start sm:self-auto"
-            >
-              Open Scanner
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={onOpenAgentReach}
+                className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg font-semibold text-xs whitespace-nowrap self-start sm:self-auto"
+              >
+                Open Scanner
+              </button>
+              {onNavigateStage && (
+                <button
+                  onClick={() => onNavigateStage('bigset')}
+                  className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-semibold text-xs whitespace-nowrap self-start sm:self-auto flex items-center gap-1 shadow-sm"
+                >
+                  <Sparkles className="w-3 h-3" />
+                  <span>Bigset Lead Swarm</span>
+                </button>
+              )}
+            </div>
           </div>
 
           <div className="grid grid-cols-1 gap-4">

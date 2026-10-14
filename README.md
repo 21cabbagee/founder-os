@@ -2,7 +2,11 @@
 
 > **A high-craft, action-oriented operating workspace that guides founders from a painful market problem to a validated product, repeatable distribution, unit economics, defensible moat, and liquidity.**
 >
-> Built with React, Tailwind CSS, Lucide icons, Vitest, and integrated with **Agent Reach** for real-time market discovery and customer signal routing.
+> Built with React, Tailwind CSS, Lucide icons, Vitest, and integrated with:
+> - **Agent Reach** for real-time market discovery and customer signal routing.
+> - **Bigset by TinyFish** for turning 1 sentence into a structured, self-refreshing lead dataset.
+> - **FreeLLMAPI & OmniRoute** for pooling 5+ independent free-tier LLM providers behind a unified endpoint with zero token costs.
+> - **Jev Engineering (TypeSafe Blueprint)** for meta-attention, query-aware visibility ladders, tiered tool disclosure, and routing trap avoidance.
 
 ---
 
@@ -12,14 +16,15 @@ Founder OS rejects the "generic dead template" and "AI chat wrapper" paradigms. 
 
 1. **Answer the 4 North-Star Questions Daily:** *What matters now? What evidence do we have? What is blocked? What changed?*
 2. **Ground Every Assumption in Customer Evidence:** Log interview quotes, stopwatch-timed pain audits, and willingness-to-pay signals.
-3. **Enforce "One-Job / One-Screen" Product Clarity:** Prevent feature bloat before achieving 80%+ clinician pilot retention.
-4. **Execute Bounded Distribution Experiments:** Test founder-led video outreach, educational workshops, and content with explicit time/spend budgets.
-5. **Monitor Variable AI Delivery Costs:** Track speech-to-text (Deepgram Nova-3) and LLM inference (Claude 3.5 Sonnet) token consumption per unit to preserve 90%+ gross margins.
-6. **Compound Structural Defensibility:** Build vertical workflow switching costs, proprietary clinical data, and regulatory HIPAA moats that generic foundation models cannot replicate.
+3. **Generate Live Datasets in 1 Sentence with Bigset:** Turn prompts into structured, deduplicated lead tables with verifiable source URLs and automated refresh schedules.
+4. **Pool Free-Tier LLM Quotas with FreeLLMAPI & OmniRoute:** Multiply prototyping capacity by aggregating Google AI Studio, Groq, Cerebras, and Mistral behind one endpoint with auto-failover.
+5. **Eliminate KV Cache Waste with Jev Engineering:** Score context chunks on a query-aware visibility ladder, disclose tools snippet-first, and avoid the routing trap where cheap models cost more.
+6. **Enforce "One-Job / One-Screen" Product Clarity:** Prevent feature bloat before achieving 80%+ clinician pilot retention.
+7. **Compound Structural Defensibility:** Build vertical workflow switching costs, proprietary clinical data, and regulatory HIPAA moats.
 
 ---
 
-## 🏛️ 7-Stage Operating Architecture
+## 🏛️ Operating Architecture & Modules
 
 ### 1. Founder Dashboard (`StageDashboard.jsx`)
 - **Action-Oriented Hero:** Direct answers to the 4 essential operating questions.
@@ -38,7 +43,7 @@ Founder OS rejects the "generic dead template" and "AI chat wrapper" paradigms. 
 
 ### 4. Bounded Distribution Engine (`StageDistribution.jsx`)
 - **Bounded Channel Experiments:** Tracks audience, hypothesis, weekly spend budget, time budget (hours/wk), leading metric target vs observed, and learnings.
-- **Ethical Outreach Generator:** Generates 1-on-1 personalized outreach emails with verified observations, specific value, low-friction asks, and opt-out reminders (no fabricated referrals or deceptive claims).
+- **Ethical Outreach Generator:** Generates 1-on-1 personalized outreach emails with verified observations, specific value, low-friction asks, and opt-out reminders.
 - **Content Batching Pipeline:** 5-stage lifecycle (Idea, Script, Recording, Review, Published) for video teardowns and clinical guides.
 
 ### 5. Execution & Operating Rhythm (`StageOperations.jsx`)
@@ -61,6 +66,30 @@ Founder OS rejects the "generic dead template" and "AI chat wrapper" paradigms. 
 
 ---
 
+## ⚡ Integrated AI Engines (Bigset, FreeLLMAPI, Jev)
+
+### 1. Bigset by TinyFish — 1-Sentence Live Web Dataset Swarm (`BigsetIntelView.jsx`)
+- **Natural Language Schema Inference:** Input any sentence (e.g. *"Startups that raised funding in the last 30 days"*, *"Solo physical therapy clinics in Colorado & Texas"*); Bigset infers the columns, primary key, and validation rules.
+- **Parallel Sub-Agent Swarm:** Orchestrator agent performs discovery while parallel sub-agents fan out, each scoped to an entity to extract verified facts with live source links.
+- **Primary-Key Deduplication:** Avoids duplicate rows and guarantees provenance.
+- **Automated Refresh Cadence:** 30 min, 6 hours, 12 hours, Daily, Weekly with live CSV and JSON export.
+
+### 2. FreeLLMAPI & OmniRoute Multi-Provider Gateway (`GatewayManagerView.jsx`)
+- **Unified Quota Pool:** Connects Google AI Studio (Gemini 2.0 Flash), Groq (Llama-3.3-70b), Cerebras (Llama-3.3-70b), Mistral (Mistral Small), and OpenRouter behind `localhost:3001/v1` or `localhost:20128/v1`.
+- **Aggregate Capacity:** Unlocks 31,000+ daily free requests and 90+ RPM concurrency with automatic 429 failover.
+- **Smart Strategies:** `auto` (balance), `auto/coding` (syntax quality), `auto/fast` (sub-120ms latency), `auto/cheap`, `auto/offline` (highest remaining quota).
+- **`X-Routed-Via` Telemetry:** Live inspection showing which provider answered, latency in ms, and fallback hops.
+- **Production Off-Ramp (`USE_GATEWAY`):** 1-click toggle to route directly to paid frontier endpoints (Claude 3.5 Sonnet / Azure) without code changes.
+
+### 3. Jev Engineering for Coding Agents (`JevHarnessView.jsx`)
+- **Query-Aware Visibility Ladder:** Replaces blind compaction. Chunks are dynamically classified as `HIDE` (0 tokens), `SHORT` (10-20 tokens), `LONG` (50-100 tokens), or `FULL` (100% tokens) based on the active question, delivering **80%+ context token savings**.
+- **The Routing Trap Calculator:** Implements the exact cost formula from Jev Section II.A ($25Y + 5Z$ vs $3X + 20Y + 8Z + 5(Y+Z)$). Proves why naive routing to cheaper models loses money when context $X$ is large, and shows when it is safe to route ($5Y > 3(X+Z)$).
+- **Tiered Tool Disclosure:** Discloses 50+ candidate tools snippet-first (<150 tokens total), loads argument schemas only on demand, and pulls full documentation only for complex one-offs.
+- **Security-Aware Routing Matrix:** Automatically routes public documentation to free gateway models, while restricting secrets, `.env` files, and HIPAA BAA data to verified first-party frontier endpoints.
+- **Conditional Instructions:** Rules attached to conditions (`touches *.tsx`, `inside billing/`, `writing prose`) that are pinned against compaction.
+
+---
+
 ## 📡 Agent Reach Integration
 
 Founder OS integrates natively with **Agent Reach** (`agent-reach` v1.5.0), an upstream intelligence router installed on the host system. Rather than hallucinating customer pain points or market trends, Agent Reach provides direct command recipes to extract primary evidence:
@@ -75,12 +104,12 @@ Founder OS integrates natively with **Agent Reach** (`agent-reach` v1.5.0), an u
 
 ## 🚀 Final Build & Verification Report
 
-| Metric / Check | Target Requirement | Verified Result | Status |
+| Verification Step | Target Requirement | Verified Result | Status |
 | :--- | :--- | :--- | :--- |
-| **Vitest Automated Tests** | Core math & decision logic | **8/8 tests passing** (122ms execution time) | ✅ PASS |
-| **Vite Production Build** | Zero TypeScript / bundling errors | **Built clean in 561ms** (`dist/assets/*.js`) | ✅ PASS |
+| **Vitest Automated Tests** | Core math, Bigset, Gateway, & Jev logic | **20/20 tests passing** in 79ms (`calculations.test.js` & `deepIntegration.test.js`) | ✅ PASS |
+| **Vite Production Build** | Zero TypeScript / bundling errors | **Built clean in 361ms** (`dist/assets/*.js`) | ✅ PASS |
 | **Dev Server HTTP Health** | `http://localhost:5173` | **HTTP 200 OK** | ✅ PASS |
-| **UI/UX Aesthetics** | Non-generic, dark-mode `#080d1a`, responsive | **Custom Tailwind design system with micro-borders & animations** | ✅ PASS |
+| **UI/UX Aesthetics** | Non-generic, dark-mode `#080d1a`, responsive | **Custom Tailwind design system with micro-borders, sliders, & animations** | ✅ PASS |
 | **State Persistence** | Browser reload resilience | **Synchronized via `localStorage` under `founderos_v2_*`** | ✅ PASS |
 | **Demo Data Isolation** | Clean reset capability | **1-click Reset Demo button restores pristine ScribeFlow data** | ✅ PASS |
 | **GTM Export Engine** | Markdown & JSON export | **Working `.md` download & clipboard copy** | ✅ PASS |
@@ -102,10 +131,10 @@ cd founder-os
 # 2. Install dependencies
 npm install
 
-# 3. Run development server
+# 3. Start local development server
 npm run dev
 
-# 4. Run automated test suite
+# 4. Run automated test suite (20 tests)
 npm test
 
 # 5. Build production bundle
@@ -114,15 +143,4 @@ npm run build
 
 ---
 
-## 📈 Go-To-Market (GTM) Execution Playbook
-
-For founders launching **ScribeFlow** or applying Founder OS to their own vertical venture:
-
-1. **Week 1–2 (Discovery):** Log 15 recorded customer interviews with solo practice owners. Identify the exact EHR (WebPT / Jane App / Clinicient) where documentation backlog is highest.
-2. **Week 3–4 (Wedge):** Deploy the "One-Job / One-Screen" ambient listener to 5 early pilot clinics. Measure note acceptance rate daily; do not build billing or scheduling features until note acceptance exceeds 85%.
-3. **Week 5–8 (Distribution):** Send 25 personalized 90-second Loom teardowns weekly to clinic owners identified via the CMS NPI registry. Maintain ethical, verifiable claims with an explicit opt-out.
-4. **Week 9–12 (Retention & Scale):** Convert pilots to $199/month recurring subscriptions. Monitor variable API costs with the Cost Watchlist to ensure unit margins remain >90%.
-
----
-
-*Founder OS is engineered for founders who value evidence over assumptions.*
+*Founder OS is engineered for founders and AI engineers who value evidence over assumptions.*

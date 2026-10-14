@@ -8,6 +8,9 @@ import StageDistribution from './components/stages/StageDistribution';
 import StageOperations from './components/stages/StageOperations';
 import { StageEconomics } from './components/stages/StageEconomics';
 import { StageStrategy } from './components/stages/StageStrategy';
+import BigsetIntelView from './components/intel/BigsetIntelView';
+import GatewayManagerView from './components/gateway/GatewayManagerView';
+import JevHarnessView from './components/jev/JevHarnessView';
 
 import {
   INITIAL_VENTURE,
@@ -208,6 +211,7 @@ export default function App() {
             marketSizing={marketSizing}
             onUpdateMarketSizing={setMarketSizing}
             onOpenAgentReach={() => setIsAgentReachOpen(true)}
+            onNavigateStage={setActiveStage}
           />
         )}
 
@@ -250,6 +254,7 @@ export default function App() {
             setVenture={setVenture}
             costWatchlist={costWatchlist}
             setCostWatchlist={setCostWatchlist}
+            onNavigateStage={setActiveStage}
           />
         )}
 
@@ -264,7 +269,20 @@ export default function App() {
             costWatchlist={costWatchlist}
             moatMap={moatMap}
             setMoatMap={setMoatMap}
+            onNavigateStage={setActiveStage}
           />
+        )}
+
+        {activeStage === 'bigset' && (
+          <BigsetIntelView />
+        )}
+
+        {activeStage === 'gateway' && (
+          <GatewayManagerView />
+        )}
+
+        {activeStage === 'jev' && (
+          <JevHarnessView />
         )}
       </main>
 
